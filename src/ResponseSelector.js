@@ -13,6 +13,8 @@ export function Reponses(command, user, message, gameName, buildArg)
             var build = message.split("\'")[2];
             console.log("Game Build!");
             return Reponses("!build", user, message, game, build);
+        case "!commands":
+            return "https://github.com/Dorky106/Twitch-Chatbot/wiki";
         default:
             //Dice Roll Regex
             const diceRegex = /^\!d\d/gm;

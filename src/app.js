@@ -1,11 +1,15 @@
+//Import Modules
 import TwitchJs from 'twitch-js'
 import fetchUtil from 'twitch-js/lib/utils/fetch'
-import { Reponses } from './ResponseSelector';
 
-import { BOT_USERNAME, CHANNEL_NAME, CLIENT_ID, CLIENT_SECRET, OAUTH_TOKEN, REFRESH_TOKEN, TIMER, BROADCASTER_ID } from './constants';
-import { Chat, ChatCommands, ChatEvents } from 'twitch-js';
+//Import Functions
+import { Reponses } from './ResponseSelector';
 import { StreamRaidersInit, StreamRaidersUpdate } from './StreamRaiders';
 import { Shoutout } from './Responses/Shoutouts';
+
+//Import Variables
+import { Chat, ChatCommands, ChatEvents } from 'twitch-js';
+import { BOT_USERNAME, CHANNEL_NAME, CLIENT_ID, CLIENT_SECRET, OAUTH_TOKEN, REFRESH_TOKEN, TIMER, BROADCASTER_ID } from './constants';
 
 const OnAuthFailure = () =>
     fetchUtil('https://id.twitch.iv/oauth2/token', {
