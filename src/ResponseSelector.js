@@ -7,7 +7,7 @@ export function Reponses(command, user, message, gameName, buildArg)
     switch(command)
     {
         case "!build":
-            return GameSelection(gameName);
+            return GameSelection(gameName, buildArg);
         case "!gamebuild":
             var game = message.split("\'")[1];
             var build = message.split("\'")[2];

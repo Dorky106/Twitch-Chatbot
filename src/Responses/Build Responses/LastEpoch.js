@@ -2,7 +2,7 @@ import { DLastEpoch } from "../../constants";
 
 export function LastEpoch(argument)
 {
-    for(const[key, value] of DLastEpoch.entries(dictionary))
+    for(const[key, value] of Object.entries(DLastEpoch))
     {
         console.log(key, value);
         if(argument == key)

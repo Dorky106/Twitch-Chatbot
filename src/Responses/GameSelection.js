@@ -4,7 +4,7 @@ import { LastEpoch } from "./Build Responses/LastEpoch";
 import { PathofExile } from "./Build Responses/PathofExile";
 import { WolcenLordsOfMayhem } from "./Build Responses/WolcenLordsOfMayhem";
 
-export function GameSelection(gameName)
+export function GameSelection(gameName, buildArg)
 {
     switch(gameName)
     {

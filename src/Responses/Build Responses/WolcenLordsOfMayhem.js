@@ -2,7 +2,7 @@ import { DWolcenLordsofMayhem } from "../../constants";
 
 export function WolcenLordsOfMayhem(argument)
 {
-    for(const[key, value] of DWolcenLordsofMayhem.entries(dictionary))
+    for(const[key, value] of Object.entries(DWolcenLordsofMayhem))
     {
         console.log(key, value);
         if(argument == key)

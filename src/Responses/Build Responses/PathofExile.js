@@ -2,7 +2,7 @@ import { DPathofExile } from "../../constants";
 
 export function PathofExile(argument)
 {
-    for(const[key, value] of DPathofExile.entries(dictionary))
+    for(const[key, value] of Object.entries(DPathofExile))
     {
         console.log(key, value);
         if(argument == key)
