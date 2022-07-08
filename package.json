@@ -1,0 +1,22 @@
+{
+  "name": "twitch-arpg-chatbot",
+  "version": "1.2.0",
+  "description": "Twitch Chat Bot",
+  "main": "src",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JackPS9",
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "twitch-js": "^2.0.0-beta.44"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "twitch",
+    "chatbot",
+    "arpg"
+  ]
+}
