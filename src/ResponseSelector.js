@@ -14,7 +14,7 @@ export function Reponses(command, user, message, gameName, buildArg)
             console.log("Game Build!");
             return Reponses("!build", user, message, game, build);
         case "!commands":
-            return "https://github.com/Dorky106/Twitch-Chatbot/wiki";
+            return "@"+user+" a list of commands can be found at https://github.com/Dorky106/Twitch-Chatbot/wiki/Commands";
         default:
             //Dice Roll Regex
             const diceRegex = /^\!d\d/gm;
