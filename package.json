@@ -1,6 +1,6 @@
 {
   "name": "twitch-arpg-chatbot",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Twitch Chat Bot",
   "main": "src",
   "scripts": {
