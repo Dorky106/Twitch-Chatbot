@@ -1,22 +1,26 @@
-import { CHANNEL_NAME, StreamRaidersMessage, TIMER} from './constants';
+import { StreamRaidersMessage, TIMER} from './constants';
 let chat = null;
 let playingStreamRaiders = false;
+let channel = null;
+let message = null;
 
-export function StreamRaidersInit(_chat)
+export function StreamRaidersInit(_chat, _channel, _message)
 {
     chat = _chat;
+    channel = _channel;
+    message = _message;
     setInterval(StreamRaiders, TIMER);
 }
 
-export function StreamRaidersUpdate(playing)
+export function StreamRaidersUpdate(_playing)
 {
-    playingStreamRaiders = playing;
+    playingStreamRaiders = _playing;
 }
 
 function StreamRaiders()
 {
     if(playingStreamRaiders)
     {
-        chat.say(CHANNEL_NAME, StreamRaidersMessage)
+        chat.say(channel, message)
     }
 }

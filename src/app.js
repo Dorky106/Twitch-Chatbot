@@ -2,10 +2,11 @@ import TwitchJs from 'twitch-js'
 import fetchUtil from 'twitch-js/lib/utils/fetch'
 import { Reponses } from './ResponseSelector';
 
-import { BOT_USERNAME, CHANNEL_NAME, CLIENT_ID, CLIENT_SECRET, OAUTH_TOKEN, REFRESH_TOKEN, TIMER, BROADCASTER_ID, DGrimDawn, DWolcenLordsofMayhem, DTorchLight2, DPathofExile, DLastEpoch, Shoutouts } from './constants';
+import { BOT_USERNAME, CHANNEL_NAME, CLIENT_ID, CLIENT_SECRET, OAUTH_TOKEN, REFRESH_TOKEN, TIMER, BROADCASTER_ID, DGrimDawn, DWolcenLordsofMayhem, DTorchLight2, DPathofExile, DLastEpoch, Shoutouts, StreamRaidersMessage } from './constants';
 import { Chat, ChatCommands, ChatEvents } from 'twitch-js';
 import { StreamRaidersInit, StreamRaidersUpdate } from './StreamRaiders';
 import { Shoutout } from './Responses/Shoutouts';
+import { Console } from 'console';
 
 var twitchJs
 const fs = require('fs');
@@ -17,6 +18,7 @@ async function FillInfo()
         var content = data.split(/\r\n|\n/);
         for(var line = 0; line < content.length; line++)
         {
+        //#region Auth and Channel Info
             if(content[line].startsWith("CLIENT_ID:"))
             {
                 CLIENT_ID = content[line].replace("CLIENT_ID:","");
@@ -37,7 +39,11 @@ async function FillInfo()
                 REFRESH_TOKEN = content[line].replace("REFRESH_TOKEN:","");
                 continue;
             }
-            
+            if(content[line].startsWith("STREAMRAIDER_MSG:"))
+            {
+                StreamRaidersMessage = content[line].replace("STREAMRAIDER_MSG:","");
+                continue;
+            }
             if(content[line].startsWith("CHANNEL_NAME:")) 
             {
                 CHANNEL_NAME = content[line].replace("CHANNEL_NAME:","");
@@ -53,14 +59,20 @@ async function FillInfo()
                 BOT_USERNAME = content[line].replace("BOT_NAME:","");
                 continue;
             }
-            if(content[line].startsWith("BOT_NAME:")) 
-            {
-                BOT_USERNAME = content[line].replace("BOT_NAME:","");
-                continue;
-            }
+            //#endregion
             if(content[line].startsWith("SHOUTOUT:"))
             {
                 Shoutouts.push(content[line].replace("SHOUTOUT:",""));
+                continue;
+            }
+
+            if(content[line].startsWith("GRIMDAWN:"))
+            {
+                content[line] = content[line].replace("GRIMDAWN:","");
+                DGrimDawn.push({ 
+                    key: content[line].split(':')[0],
+                    value: content[line].split(':')[1]
+                });
                 continue;
             }
             
@@ -137,7 +149,6 @@ function CheckStreamInfo()
         clientId: CLIENT_ID, 
         username: BOT_USERNAME, 
         onAuthenticationFailure: OnAuthFailure})
-    console.log("Checking Stream Info for updates");
     twitchJs.api
     .get('streams', {search: {user_id: BROADCASTER_ID}})
     .then(response =>{
@@ -147,6 +158,14 @@ function CheckStreamInfo()
             {
                 livestream = true;
             }
+            else
+            {
+                livestream = false;
+            }
+        }
+        else
+        {
+            livestream = false;
         }
     });
     
@@ -161,7 +180,7 @@ function CheckStreamInfo()
         {
             if(tmp.includes("!streamraiders"))
             {
-                StreamRaidersUpdate(true);
+                StreamRaidersUpdate(true, CHANNEL_NAME);
             }
             else
             {
@@ -186,7 +205,6 @@ function CheckStreamInfo()
 }
 
 const run = async() => {
-    console.log("Running!");
     chat = new Chat({
         username: BOT_USERNAME,
         token: OAUTH_TOKEN,
@@ -195,7 +213,7 @@ const run = async() => {
 
     await chat.connect();
     await chat.join(CHANNEL_NAME);
-    StreamRaidersInit(chat);
+    StreamRaidersInit(chat, CHANNEL_NAME, StreamRaidersMessage);
     chat.on('PRIVMSG', (message) => 
     {
         var user = message.tags.displayName;

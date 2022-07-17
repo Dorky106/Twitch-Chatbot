@@ -46,6 +46,8 @@ export var StreamRaidersMessage = '';
 export var Shoutouts = [];
 //#endregion
 
+export var DADVENTURESOFVANHELSINGFINALCUT = [];
+export var DDiablo3 = [];
 export var DGrimDawn = [];
 export var DLastEpoch = [];
 export var DPathofExile = [];

@@ -4,6 +4,7 @@ import { GameSelection } from "./Responses/GameSelection";
 
 export function Reponses(command, user, message, gameName, buildArg)
 {
+    console.log(gameName + " : " + buildArg)
     switch(command)
     {
         case "!build":
@@ -22,7 +23,9 @@ export function Reponses(command, user, message, gameName, buildArg)
             {
                 return RollDice(user, command);
             }
-            console.log("Doesn't match regex for dice roll!");
-            return null;
+            //Last possible thing, check if command is a build in the currently played game
+            buildArg = command.replace("!", "");
+            console.log(buildArg);
+            return Responses("!build", user, message, gameName, );
     }
 }
